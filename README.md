@@ -23,5 +23,12 @@ The all tasks page should just be an image with a back button; it needs no funct
 
 ![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/alltaskpage.png)
 
-DAILY CHANGE LOG:
+
+# Confirmation of task submission page
+![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/submittedpage.png)
+
+### DAILY CHANGE LOG:
+
+Today, I added the homepage, the add task page and the all task page. The homepage has the
+buttons to go to both the add task page and the all task page. The all task page is empty for now. 
 
