@@ -16,7 +16,12 @@ The all tasks page should just be an image with a back button; it needs no funct
 
 ## SCREENSHOTS
 
+# Home Page
 ![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/homepage.png)
+
+# All tasks page
+
+![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/alltaskpage.png)
 
 DAILY CHANGE LOG:
 
