@@ -20,16 +20,14 @@ The all tasks page should just be an image with a back button; it needs no funct
 ## SCREENSHOTS
 
 # Home Page
-![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/lab-27-homepage.png)
+<img src="/screenshots/lab-27-homepage.png"
+width=150; margin-right= 10px;/>
 
 # Task Detail Page 
-![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/task-detail-page.png)
-
 <img src="/screenshots/task-detail-page.png"
 width=150; margin-right= 10px;/>
 
-<img src="/screenshots/lab-27-homepage.png"
-width=150; margin-right= 10px;/>
+
 
 ### DAILY CHANGE LOG:
 
