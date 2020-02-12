@@ -20,8 +20,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 ![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/lab-27-homepage.png)
 
 # Task Detail Page 
-
-![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/alltaskpage.png)
+![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/task-detail-page.png)
 
 ### DAILY CHANGE LOG:
 
