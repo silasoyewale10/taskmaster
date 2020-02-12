@@ -17,15 +17,11 @@ The all tasks page should just be an image with a back button; it needs no funct
 ## SCREENSHOTS
 
 # Home Page
-![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/homepage.png)
+![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/lab-27-homepage.png)
 
-# All tasks page
+# Task Detail Page 
 
 ![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/alltaskpage.png)
-
-
-# Confirmation of task submission page
-![](https://github.com/silasoyewale10/taskmaster/blob/master/screenshots/submittedpage.png)
 
 ### DAILY CHANGE LOG:
 
