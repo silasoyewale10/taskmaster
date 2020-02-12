@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button goToAddTaskPage = findViewById(R.id.button3);
+        final Button goToAddTaskPage = findViewById(R.id.button3);
         goToAddTaskPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,14 +47,22 @@ public class MainActivity extends AppCompatActivity {
                 if(checkedId == R.id.hygieneRadioButton){
                     choiceOfTask = "hygiene";
                     Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+                    gotoTaskDetailPage.putExtra("taskName", "hygiene");
+
                     MainActivity.this.startActivity((gotoTaskDetailPage));
+
+
                 } else if(checkedId == R.id.javaPracticeRadioButton){
                     choiceOfTask = "javaPractice";
                     Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+                    gotoTaskDetailPage.putExtra("taskName", "javaPractice");
+
                     MainActivity.this.startActivity((gotoTaskDetailPage));
                 }else if(checkedId == R.id.socialHangOutRadioButton){
                     choiceOfTask = "socialHangOut";
                     Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+                    gotoTaskDetailPage.putExtra("taskName", "socialHangOut");
+
                     MainActivity.this.startActivity((gotoTaskDetailPage));
                 }
                 SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -79,13 +87,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-//    @Override
-//    protected  void onResume(){
-//        super.onResume();
-//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        String chosenTask = sp.getString("task", "default");
-//        if(chosenTask.equals("Hygiene")){
-//
-//        }
+
+    @Override
+    protected  void onResume(){
+        super.onResume();
+        TextView tt = findViewById(R.id.textView4);
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String chosenUserName = sp.getString("userName", "default");
+        tt.setText(chosenUserName + "'s tasks");
+        tt.setVisibility(View.VISIBLE);
+
+        }
 //    }
 }

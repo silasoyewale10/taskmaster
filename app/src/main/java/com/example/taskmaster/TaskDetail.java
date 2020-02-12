@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class TaskDetail extends AppCompatActivity {
 
@@ -14,5 +15,8 @@ public class TaskDetail extends AppCompatActivity {
 
 //        Intent word = new Intent();
 //        word.
+        String taskNameView = getIntent().getStringExtra("taskName");
+        TextView taskTextView = findViewById(R.id.taskName);
+        taskTextView.setText(taskNameView);
     }
 }

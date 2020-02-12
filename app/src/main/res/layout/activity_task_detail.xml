@@ -7,13 +7,14 @@
     tools:context=".TaskDetail">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/taskName"
         android:layout_width="307dp"
         android:layout_height="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:text="TitleHolder"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
