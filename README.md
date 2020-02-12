@@ -28,7 +28,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 <img src="/somefolder/screenshot_1.png"
 width=150; margin-right= 10px;/>
 
-<img src="/somefolder/screenshot_1.png"
+<img src="/screenshots/lab-27-homepage.png"
 width=150; margin-right= 10px;/>
 
 ### DAILY CHANGE LOG:
