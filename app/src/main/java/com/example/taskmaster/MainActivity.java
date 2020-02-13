@@ -39,39 +39,48 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RadioGroup tasksRadioGroup = findViewById(R.id.tasksRadioGroup);
-        tasksRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                String choiceOfTask = "default";
-                if(checkedId == R.id.hygieneRadioButton){
-                    choiceOfTask = "hygiene";
-                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-                    gotoTaskDetailPage.putExtra("taskName", "hygiene");
-
-                    MainActivity.this.startActivity((gotoTaskDetailPage));
 
 
-                } else if(checkedId == R.id.javaPracticeRadioButton){
-                    choiceOfTask = "javaPractice";
-                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-                    gotoTaskDetailPage.putExtra("taskName", "javaPractice");
+// items in radio group and their ids.  Just in case i need my buttons back.
 
-                    MainActivity.this.startActivity((gotoTaskDetailPage));
-                }else if(checkedId == R.id.socialHangOutRadioButton){
-                    choiceOfTask = "socialHangOut";
-                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-                    gotoTaskDetailPage.putExtra("taskName", "socialHangOut");
+         // Hygiene   hygieneRadioButton
+        //socialHangOut  socialHangOutRadioButton
+        //javaPractice  javaPracticeRadioButton
 
-                    MainActivity.this.startActivity((gotoTaskDetailPage));
-                }
-                SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = p.edit();
-                editor.putString("task", choiceOfTask);
-                editor.apply();
-            }
-
-        });
+//        RadioGroup tasksRadioGroup = findViewById(R.id.tasksRadioGroup);
+//        tasksRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                String choiceOfTask = "default";
+//                if(checkedId == R.id.hygieneRadioButton){
+//                    choiceOfTask = "hygiene";
+//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+//                    gotoTaskDetailPage.putExtra("taskName", "hygiene");
+//
+//                    MainActivity.this.startActivity((gotoTaskDetailPage));
+//
+//
+//                } else if(checkedId == R.id.javaPracticeRadioButton){
+//                    choiceOfTask = "javaPractice";
+//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+//                    gotoTaskDetailPage.putExtra("taskName", "javaPractice");
+//
+//                    MainActivity.this.startActivity((gotoTaskDetailPage));
+//                }else if(checkedId == R.id.socialHangOutRadioButton){
+//                    choiceOfTask = "socialHangOut";
+//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+//                    gotoTaskDetailPage.putExtra("taskName", "socialHangOut");
+//
+//                    MainActivity.this.startActivity((gotoTaskDetailPage));
+//                }
+//                SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                SharedPreferences.Editor editor = p.edit();
+//                editor.putString("task", choiceOfTask);
+//                editor.apply();
+//            }
+//
+//        });
+//
 
 
 
