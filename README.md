@@ -23,15 +23,12 @@ The all tasks page should just be an image with a back button; it needs no funct
 <img src="/screenshots/lab-28-homepage.png"
 width=150; margin-right= 10px;/>
 
-# Task Detail Page 
-<img src="/screenshots/task-detail-page.png"
-width=150; margin-right= 10px;/>
-
-
 
 ### DAILY CHANGE LOG:
 
-Today, I added the homepage, the add task page and the all task page. The homepage has the
+Day 1, I added the homepage, the add task page and the all task page. The homepage has the
 buttons to go to both the add task page and the all task page. The all task page is empty for now. 
 Day 2: I added the settings page to change the username displayed on the homepage. I also added three tasks to be picked from. Each task leads you to a task page that shows the title of the chosen task. 
+Day 3: I added the recycleview to be able to click on the list of tasks. When you click on each task, it dshould take you to a page displaying the task and lorem ipsum.
+Also, I deleted the radio buttons from yesterday since I now have the tasks as a recyled view. I moved my tasks to left top corner to make more room for my recycle view.
 
