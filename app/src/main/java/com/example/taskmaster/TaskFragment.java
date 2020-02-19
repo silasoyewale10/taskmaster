@@ -85,6 +85,8 @@ public class TaskFragment extends Fragment {
             listOfTasks= myDb.taskToDatabase().getAll();
             String TAG = "checker";
             Log.i(TAG, listOfTasks.toString());
+
+
             listOfTasks.add(new Tasks("hygiene", "brush", "new"));
             listOfTasks.add(new Tasks("work", "dress", "assigned"));
             listOfTasks.add(new Tasks("piano", "play", "in progress"));
