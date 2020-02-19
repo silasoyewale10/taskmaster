@@ -23,6 +23,10 @@ The all tasks page should just be an image with a back button; it needs no funct
 <img src="/screenshots/lab-29-homepage.png"
 width=150; margin-right= 10px;/>
 
+# Add New Task Page
+<img src="/screenshots/addTaskToDB.png"
+width=150; margin-right= 10px;/>
+
 
 ### DAILY CHANGE LOG:
 
