@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.example.taskmaster.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 /**
  * A fragment representing a list of Items.
@@ -49,14 +53,16 @@ public class TaskFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
-    }
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        MyDatabase myDb;
+//        myDb = Room.databaseBuilder(getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
+//
+//        if (getArguments() != null) {
+//            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +79,12 @@ public class TaskFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             List<Tasks> listOfTasks = new ArrayList<>();
+
+            MyDatabase myDb;
+            myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
+            listOfTasks= myDb.taskToDatabase().getAll();
+            String TAG = "checker";
+            Log.i(TAG, listOfTasks.toString());
             listOfTasks.add(new Tasks("hygiene", "brush", "new"));
             listOfTasks.add(new Tasks("work", "dress", "assigned"));
             listOfTasks.add(new Tasks("piano", "play", "in progress"));
@@ -88,11 +100,19 @@ public class TaskFragment extends Fragment {
             listOfTasks.add(new Tasks("java", "string", "complete"));
             listOfTasks.add(new Tasks("work", "brush", "new"));
 
+
             recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
         }
         return view;
     }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
+        if (getArguments() != null) {
+            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

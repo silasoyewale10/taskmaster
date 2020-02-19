@@ -1,15 +1,16 @@
 package com.example.taskmaster;
 
-class Tasks {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class Tasks {
     String title;
     String body;
     String state;
 
-    public Tasks(String title, String body, String state) {
-        this.title = title;
-        this.body = body;
-        this.state = state;
-    }
+   @PrimaryKey(autoGenerate = true)
+   long id;
 
     public String getTitle() {
         return title;
@@ -35,5 +36,9 @@ class Tasks {
         this.state = state;
     }
 
-
+    public Tasks(String title, String body, String state) {
+        this.title = title;
+        this.body = body;
+        this.state = state;
+    }
 }
