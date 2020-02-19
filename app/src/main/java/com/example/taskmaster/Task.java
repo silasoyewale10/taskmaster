@@ -1,12 +1,15 @@
 package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +19,7 @@ public class Task extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task2);
+
 
 
 //        Button showSubmittedlabel = findViewById(R.id.button); // captures the particular button i want to click
@@ -44,6 +48,21 @@ public class Task extends AppCompatActivity {
                 toast.setGravity(Gravity.TOP | Gravity.LEFT,  500,850);
 //                toast.setMargin(50,10);
 
+                Tasks xx = new Tasks("title","body", "state");
+                EditText title = findViewById(R.id.editText);
+                String titleText = title.getText().toString();
+
+                EditText description = findViewById(R.id.editText2);
+                String descriptionText = description.getText().toString();
+
+                Tasks yy = new Tasks (titleText, descriptionText, "new");
+
+                MyDatabase myDb;
+                myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
+                myDb.taskToDatabase().save(yy);
+
+                Intent backToMain = new Intent(Task.this, MainActivity.class);
+                Task.this.startActivity(backToMain);
             }
         });
 

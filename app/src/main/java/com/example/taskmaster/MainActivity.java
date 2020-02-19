@@ -16,17 +16,20 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button goToAddTaskPage = findViewById(R.id.button3);
+        final Button goToAddTaskPage = findViewById(R.id.button3); //go to add taks page
         goToAddTaskPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent goToAddTask = new Intent(MainActivity.this, Task.class);
                 MainActivity.this.startActivity(goToAddTask);
+
+//                Tasks
             }
 
         });
