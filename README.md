@@ -20,7 +20,7 @@ The all tasks page should just be an image with a back button; it needs no funct
 ## SCREENSHOTS
 
 # Home Page
-<img src="/screenshots/lab-28-homepage.png"
+<img src="/screenshots/lab-29-homepage.png"
 width=150; margin-right= 10px;/>
 
 
@@ -34,4 +34,5 @@ I added the settings page to change the username displayed on the homepage. I al
 #### Day 3
 I added the recycleview to be able to click on the list of tasks. When you click on each task, it dshould take you to a page displaying the task and lorem ipsum.
 Also, I deleted the radio buttons from yesterday since I now have the tasks as a recyled view. I moved my tasks to left top corner to make more room for my recycle view.
-
+### Day 4
+I added database i.e. persistent storage and Room. Whe you click on the tasks, it takes you to a detail page that shows the title, body, and state of the clicked task.
