@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.taskmaster.TaskFragment.OnListFragmentInteractionListener;
 import com.example.taskmaster.dummy.DummyContent.DummyItem;
@@ -52,26 +54,32 @@ static final String TAG = "mnf.ViewAdapter";
             public void onClick(View v) {
                 Log.i(TAG, "it was clicked");
                 Context context = vv.getContext();
-                Intent gotoTaskdetailPage = new Intent(context, TaskDetail.class);
+                Log.i(TAG, "--------------" + context.getClass().getName());
+                if(context.getClass().getName().equals("com.example.taskmaster.AllTasks")){
+//                    Context context = getApplicationContext();
+                    CharSequence confirmation = " Title is: " + holder.mItem.title + " body is: " + holder.mItem.body + " state is: " + holder.mItem.state;
+//                            "Your click is on all task page";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, confirmation, duration);
+                    toast.show();
+                    toast.setGravity(Gravity.TOP | Gravity.LEFT,  500,850);
+                }
+                else if (context.getClass().getName().equals("com.example.taskmaster.MainActivity")){
+                    Intent gotoTaskdetailPage = new Intent(context, TaskDetail.class);
 
 
-                gotoTaskdetailPage.putExtra("title", holder.mItem.title);
+                    gotoTaskdetailPage.putExtra("title", holder.mItem.title);
 
 
-                gotoTaskdetailPage.putExtra("body", holder.mItem.body);
-                gotoTaskdetailPage.putExtra("state", holder.mItem.state);
+                    gotoTaskdetailPage.putExtra("body", holder.mItem.body);
+                    gotoTaskdetailPage.putExtra("state", holder.mItem.state);
 
 
 
-                context.startActivity((gotoTaskdetailPage));
-//                        Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
+                    context.startActivity((gotoTaskdetailPage));
+                }
 
-
-//                if (null != mListener) {
-//                    // Notify the active callbacks interface (the activity, if the
-//                    // fragment is attached to one) that an item has been selected.
-//                    mListener.onListFragmentInteraction(holder.mItem);
-//                }
             }
         });
     }
