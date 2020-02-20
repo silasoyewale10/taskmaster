@@ -20,13 +20,16 @@ The all tasks page should just be an image with a back button; it needs no funct
 ## SCREENSHOTS
 
 # Home Page
-<img src="/screenshots/lab-29-homepage.png"
+<img src="/screenshots/lab-30-homepage.png"
 width=150; margin-right= 10px;/>
 
 # Add New Task Page
 <img src="/screenshots/addTaskToDB.png"
 width=150; margin-right= 10px;/>
 
+# Add New Task Page
+<img src="/screenshots/addTaskToDB.png"
+width=150; margin-right= 10px;/>
 
 ### DAILY CHANGE LOG:
 
@@ -40,3 +43,5 @@ I added the recycleview to be able to click on the list of tasks. When you click
 Also, I deleted the radio buttons from yesterday since I now have the tasks as a recyled view. I moved my tasks to left top corner to make more room for my recycle view.
 ### Day 4
 I added database i.e. persistent storage and Room. Whe you click on the tasks, it takes you to a detail page that shows the title, body, and state of the clicked task.
+### Day 5
+I added recyclerview to the all task page and on the click of each task, it shows a toast of title, body, and state.
