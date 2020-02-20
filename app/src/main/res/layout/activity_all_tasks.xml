@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".AllTasks">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="359dp"
-        android:layout_height="545dp"
+
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.example.taskmaster.TaskFragment"
+        android:layout_width="320dp"
+        android:layout_height="440dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

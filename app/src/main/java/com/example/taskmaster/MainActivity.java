@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent goToAddTask = new Intent(MainActivity.this, Task.class);
                 MainActivity.this.startActivity(goToAddTask);
-
-//                Tasks
             }
 
         });
@@ -43,50 +41,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-// items in radio group and their ids.  Just in case i need my buttons back.
-
-         // Hygiene   hygieneRadioButton
-        //socialHangOut  socialHangOutRadioButton
-        //javaPractice  javaPracticeRadioButton
-
-//        RadioGroup tasksRadioGroup = findViewById(R.id.tasksRadioGroup);
-//        tasksRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                String choiceOfTask = "default";
-//                if(checkedId == R.id.hygieneRadioButton){
-//                    choiceOfTask = "hygiene";
-//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-//                    gotoTaskDetailPage.putExtra("taskName", "hygiene");
-//
-//                    MainActivity.this.startActivity((gotoTaskDetailPage));
-//
-//
-//                } else if(checkedId == R.id.javaPracticeRadioButton){
-//                    choiceOfTask = "javaPractice";
-//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-//                    gotoTaskDetailPage.putExtra("taskName", "javaPractice");
-//
-//                    MainActivity.this.startActivity((gotoTaskDetailPage));
-//                }else if(checkedId == R.id.socialHangOutRadioButton){
-//                    choiceOfTask = "socialHangOut";
-//                    Intent gotoTaskDetailPage = new Intent(MainActivity.this, TaskDetail.class);
-//                    gotoTaskDetailPage.putExtra("taskName", "socialHangOut");
-//
-//                    MainActivity.this.startActivity((gotoTaskDetailPage));
-//                }
-//                SharedPreferences p = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//                SharedPreferences.Editor editor = p.edit();
-//                editor.putString("task", choiceOfTask);
-//                editor.apply();
-//            }
-//
-//        });
-//
-
-
-
         Button goToSettingsPage = findViewById(R.id.button2);
         goToSettingsPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity((goToSettingsPage));
             }
         });
-
-
-
     }
 
     @Override
@@ -111,5 +62,4 @@ public class MainActivity extends AppCompatActivity {
         tt.setVisibility(View.VISIBLE);
 
         }
-//    }
 }
