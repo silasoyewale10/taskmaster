@@ -6,6 +6,7 @@ import androidx.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,16 +14,38 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.amplify.generated.graphql.CreateTasksMutation;
+import com.amazonaws.amplify.generated.graphql.ListTaskssQuery;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.exception.ApolloException;
+
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+import type.CreateTasksInput;
 
 public class Task extends AppCompatActivity {
-
+    private AWSAppSyncClient awsAppSyncClient;
+String callTheTag = "silas";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task2);
 
+
+
+        awsAppSyncClient = AWSAppSyncClient.builder()
+                .context(getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+                .build();
+
+        getTasks();
 
         Button showLabel = findViewById(R.id.button); // captures the particular button i want to click
         showLabel.setOnClickListener(new View.OnClickListener() { //listens to when it is clicked to execute this function.
@@ -45,20 +68,15 @@ public class Task extends AppCompatActivity {
 
                 Tasks yy = new Tasks (titleText, descriptionText, "new");
 
-                MyDatabase myDb;
-
-                AWSAppSyncClient awsAppSyncClient;
-
-                awsAppSyncClient = AWSAppSyncClient.builder()
-                        .context(getApplicationContext())
-                        .awsConfiguration(new AWSConfiguration(getApplicationContext()))
-                        .build();
+                runTasksCreateMutation(titleText,descriptionText, "new");
 
 
-
-                myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
-                myDb.taskToDatabase().save(yy);
-
+//                MyDatabase myDb;
+//
+//
+//
+//                myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
+//                myDb.taskToDatabase().save(yy);
                 Intent backToMain = new Intent(Task.this, MainActivity.class);
                 Task.this.startActivity(backToMain);
             }
@@ -66,8 +84,50 @@ public class Task extends AppCompatActivity {
 
     }
 
-    public void runMutation(){
-        CreateTasksInput createTasksInput = CreateTasksInput.builder().
-                .title
+    public void runTasksCreateMutation(String title, String body, String state ){
+        CreateTasksInput createTasksInput = CreateTasksInput.builder()
+                .title(title)
+                .body(body)
+                .state(state)
+                .build();
+awsAppSyncClient.mutate(CreateTasksMutation.builder().input(createTasksInput).build())
+        .enqueue(addMutattionCallback);
     }
+    private GraphQLCall.Callback<CreateTasksMutation.Data> addMutattionCallback = new GraphQLCall.Callback<CreateTasksMutation.Data>() {
+        @Override
+        public void onResponse(@Nonnull Response<CreateTasksMutation.Data> response) {
+            Log.i(callTheTag, "Added Tasks");
+        }
+
+        @Override
+        public void onFailure(@Nonnull ApolloException e) {
+            Log.e(callTheTag, e.toString());
+        }
+    };
+
+
+
+
+    public void getTasks(){
+        awsAppSyncClient.query(ListTaskssQuery.builder().build())
+                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
+                .enqueue(tasksCallback);
+    }
+
+    private GraphQLCall.Callback<ListTaskssQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTaskssQuery.Data>() {
+        @Override
+        public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
+            Log.i(callTheTag, response.data().listTaskss().items().toString());
+            for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
+                Tasks a = new Tasks(item.title(), item.body(), item.state());
+                // 1:49:34 of video
+            };
+        }
+
+        @Override
+        public void onFailure(@Nonnull ApolloException e) {
+            Log.e(callTheTag, e.toString());
+        }
+    };
+
 }
