@@ -13,26 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+
 public class Task extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task2);
-
-
-
-//        Button showSubmittedlabel = findViewById(R.id.button); // captures the particular button i want to click
-//        showSubmittedlabel.setOnClickListener(new View.OnClickListener() { //listens to when it is clicked to execute this function.
-//            @Override
-//            public void onClick(View v) {
-//                TextView submitButton = findViewById(R.id.button);  //captures the buttons id and makes it a text object.
-//                submitButton.setText("Successfully Submitted Task");  //sets the text to succes ...
-//                submitButton.setVisibility(View.VISIBLE);     //mkaes it shown.
-//
-//            }
-//        }); // performs callback function when this button is clicked.
-
 
 
         Button showLabel = findViewById(R.id.button); // captures the particular button i want to click
@@ -46,7 +35,6 @@ public class Task extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, confirmation, duration);
                 toast.show();
                 toast.setGravity(Gravity.TOP | Gravity.LEFT,  500,850);
-//                toast.setMargin(50,10);
 
                 Tasks xx = new Tasks("title","body", "state");
                 EditText title = findViewById(R.id.editText);
@@ -58,6 +46,16 @@ public class Task extends AppCompatActivity {
                 Tasks yy = new Tasks (titleText, descriptionText, "new");
 
                 MyDatabase myDb;
+
+                AWSAppSyncClient awsAppSyncClient;
+
+                awsAppSyncClient = AWSAppSyncClient.builder()
+                        .context(getApplicationContext())
+                        .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+                        .build();
+
+
+
                 myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
                 myDb.taskToDatabase().save(yy);
 
@@ -66,5 +64,10 @@ public class Task extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void runMutation(){
+        CreateTasksInput createTasksInput = CreateTasksInput.builder().
+                .title
     }
 }
