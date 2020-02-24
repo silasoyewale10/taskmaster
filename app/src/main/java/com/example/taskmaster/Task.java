@@ -31,7 +31,7 @@ import type.CreateTasksInput;
 
 public class Task extends AppCompatActivity {
     private AWSAppSyncClient awsAppSyncClient;
-String callTheTag = "silas";
+    String callTheTag = "silas";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,7 +45,7 @@ String callTheTag = "silas";
                 .awsConfiguration(new AWSConfiguration(getApplicationContext()))
                 .build();
 
-        getTasks();
+//        getTasks();
 
         Button showLabel = findViewById(R.id.button); // captures the particular button i want to click
         showLabel.setOnClickListener(new View.OnClickListener() { //listens to when it is clicked to execute this function.
@@ -90,8 +90,8 @@ String callTheTag = "silas";
                 .body(body)
                 .state(state)
                 .build();
-awsAppSyncClient.mutate(CreateTasksMutation.builder().input(createTasksInput).build())
-        .enqueue(addMutattionCallback);
+        awsAppSyncClient.mutate(CreateTasksMutation.builder().input(createTasksInput).build())
+                .enqueue(addMutattionCallback);
     }
     private GraphQLCall.Callback<CreateTasksMutation.Data> addMutattionCallback = new GraphQLCall.Callback<CreateTasksMutation.Data>() {
         @Override
@@ -108,26 +108,26 @@ awsAppSyncClient.mutate(CreateTasksMutation.builder().input(createTasksInput).bu
 
 
 
-    public void getTasks(){
-        awsAppSyncClient.query(ListTaskssQuery.builder().build())
-                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
-                .enqueue(tasksCallback);
-    }
-
-    private GraphQLCall.Callback<ListTaskssQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTaskssQuery.Data>() {
-        @Override
-        public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
-            Log.i(callTheTag, response.data().listTaskss().items().toString());
-            for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
-                Tasks a = new Tasks(item.title(), item.body(), item.state());
-                // 1:49:34 of video
-            };
-        }
-
-        @Override
-        public void onFailure(@Nonnull ApolloException e) {
-            Log.e(callTheTag, e.toString());
-        }
-    };
+//    public void getTasks(){
+//        awsAppSyncClient.query(ListTaskssQuery.builder().build())
+//                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
+//                .enqueue(tasksCallback);
+//    }
+//
+//    private GraphQLCall.Callback<ListTaskssQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTaskssQuery.Data>() {
+//        @Override
+//        public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
+//            Log.i(callTheTag, response.data().listTaskss().items().toString());
+//            for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
+//                Tasks a = new Tasks(item.title(), item.body(), item.state());
+//                // 1:49:34 of video
+//            };
+//        }
+//
+//        @Override
+//        public void onFailure(@Nonnull ApolloException e) {
+//            Log.e(callTheTag, e.toString());
+//        }
+//    };
 
 }

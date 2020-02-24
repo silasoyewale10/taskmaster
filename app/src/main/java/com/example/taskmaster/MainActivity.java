@@ -2,6 +2,8 @@ package com.example.taskmaster;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,13 +16,41 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.amazonaws.amplify.generated.graphql.ListTaskssQuery;
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+import com.apollographql.apollo.GraphQLCall;
+import com.apollographql.apollo.api.Response;
+import com.apollographql.apollo.exception.ApolloException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
+public class MainActivity extends AppCompatActivity {
+    private AWSAppSyncClient awsAppSyncClient;
+    String callTheTag = "silas";
+
+    List<Tasks> listOfTasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        awsAppSyncClient = AWSAppSyncClient.builder()
+                .context(getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+                .build();
+        this.listOfTasks = new ArrayList<>();
+        getTasks();
+
+
+        RecyclerView recyclerView = findViewById(R.id.fragment);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
 
         final Button goToAddTaskPage = findViewById(R.id.button3); //go to add taks page
         goToAddTaskPage.setOnClickListener(new View.OnClickListener() {
@@ -62,4 +92,29 @@ public class MainActivity extends AppCompatActivity {
         tt.setVisibility(View.VISIBLE);
 
         }
+
+
+
+    public void getTasks(){
+        awsAppSyncClient.query(ListTaskssQuery.builder().build())
+                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
+                .enqueue(tasksCallback);
+    }
+
+    private GraphQLCall.Callback<ListTaskssQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTaskssQuery.Data>() {
+        @Override
+        public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
+            Log.i(callTheTag, response.data().listTaskss().items().toString());
+            for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
+                Tasks a = new Tasks(item.title(), item.body(), item.state());
+                listOfTasks.add(a);
+                // 1:49:34 of video
+            };
+        }
+
+        @Override
+        public void onFailure(@Nonnull ApolloException e) {
+            Log.e(callTheTag, e.toString());
+        }
+    };
 }
