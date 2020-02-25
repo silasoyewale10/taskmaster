@@ -60,45 +60,24 @@ public class TaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            List<Tasks> listOfTasks = new ArrayList<>();
-
-            MyDatabase myDb;
-            myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
-            listOfTasks= myDb.taskToDatabase().getAll();
-            String TAG = "checker";
-            Log.i(TAG, listOfTasks.toString());
-
-
-//            listOfTasks.add(new Tasks("hygiene", "brush", "new"));
-//            listOfTasks.add(new Tasks("work", "dress", "assigned"));
-//            listOfTasks.add(new Tasks("piano", "play", "in progress"));
-//            listOfTasks.add(new Tasks("guitar", "string", "complete"));
-//            listOfTasks.add(new Tasks("java", "brush", "new"));
-//            listOfTasks.add(new Tasks("dishes", "play", "in progress"));
-//            listOfTasks.add(new Tasks("cook", "well", "new"));
-//            listOfTasks.add(new Tasks("play", "brush", "complete"));
-//            listOfTasks.add(new Tasks("socialize", "string", "in progress"));
-//            listOfTasks.add(new Tasks("eat", "brush", "assigned"));
-//            listOfTasks.add(new Tasks("sleep", "play", "in progress"));
-//            listOfTasks.add(new Tasks("work", "well", "assigned"));
-//            listOfTasks.add(new Tasks("java", "string", "complete"));
-//            listOfTasks.add(new Tasks("work", "brush", "new"));
-
-
-//            recyclerView = findViewById(R.id.fragment);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//            recyclerView.setAdapter(new MyTaskListRecyclerViewAdapter(this.listOfTasks, this));
-
-            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
-        }
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//            List<Tasks> listOfTasks = new ArrayList<>();
+//
+//            MyDatabase myDb;
+//            myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
+//            listOfTasks= myDb.taskToDatabase().getAll();
+//            String TAG = "checker";
+//            Log.i(TAG, listOfTasks.toString());
+//
+//            recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
+//        }
         return view;
     }
     @Override

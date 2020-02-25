@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Tasks> listOfTasks = new ArrayList<>();
     Context context;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
                 .awsConfiguration(new AWSConfiguration(getApplicationContext()))
                 .build();
         this.listOfTasks = new ArrayList<>();
-        getTasks();
+
+        recyclerView = findViewById(R.id.fragment);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
 
         context = this.getApplicationContext();
 
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e(callTheTag, "onError: ", e);
                                 }
                             });
-
+//AWSMobileClient.getInstance().signOut();
                         }
                     }
 
@@ -129,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     protected  void onResume(){
         super.onResume();
         TextView tt = findViewById(R.id.textView4);
+
+        getTasks();
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String chosenUserName = sp.getString("userName", "default");
@@ -149,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
             Log.i(callTheTag, response.data().listTaskss().items().toString());
+            listOfTasks.clear();
             for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
                 Tasks a = new Tasks(item.title(), item.body(), item.state());
                 Log.i("quang", item.title());
@@ -160,11 +167,10 @@ public class MainActivity extends AppCompatActivity {
             Handler handlerMainThread = new Handler(Looper.getMainLooper()) {
                 @Override
                 public void handleMessage(Message inputMessage) {
-                    RecyclerView recyclerView = findViewById(R.id.fragment);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                    recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
+                    recyclerView.getAdapter().notifyDataSetChanged();
                 }
             };
+            handlerMainThread.obtainMessage().sendToTarget();
         }
 
         @Override
