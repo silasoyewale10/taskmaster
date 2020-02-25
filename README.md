@@ -20,16 +20,9 @@ The all tasks page should just be an image with a back button; it needs no funct
 ## SCREENSHOTS
 
 # Home Page
-<img src="/screenshots/lab-30-homepage.png"
+<img src="/screenshots/lab-36-homepage.png"
 width=150; margin-right= 10px;/>
 
-# All Tasks Page RecyclerView
-<img src="/screenshots/lab-30-allTaskPage.png"
-width=150; margin-right= 10px;/>
-
-# All Tasks Page with Toast
-<img src="/screenshots/addTaskPageWithToast.png"
-width=150; margin-right= 10px;/>
 
 ### DAILY CHANGE LOG:
 
