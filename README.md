@@ -45,3 +45,7 @@ Also, I deleted the radio buttons from yesterday since I now have the tasks as a
 I added database i.e. persistent storage and Room. Whe you click on the tasks, it takes you to a detail page that shows the title, body, and state of the clicked task.
 ### Day 5
 I added recyclerview to the all task page and on the click of each task, it shows a toast of title, body, and state.
+### Day 6
+Added dynamo db. Able to store and retrieve data from the AWS dynamo database. 
+### Day 7
+I added login and sign up.
