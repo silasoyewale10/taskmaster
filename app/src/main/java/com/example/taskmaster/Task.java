@@ -71,14 +71,6 @@ public class Task extends AppCompatActivity {
                 runTasksCreateMutation(titleText,descriptionText, "new");
 
 
-//                MyDatabase myDb;
-//
-//
-//
-//                myDb = Room.databaseBuilder(context.getApplicationContext(), MyDatabase.class, "add_task").allowMainThreadQueries().build();
-//                myDb.taskToDatabase().save(yy);
-                Intent backToMain = new Intent(Task.this, MainActivity.class);
-                Task.this.startActivity(backToMain);
             }
         });
 
@@ -97,6 +89,8 @@ public class Task extends AppCompatActivity {
         @Override
         public void onResponse(@Nonnull Response<CreateTasksMutation.Data> response) {
             Log.i(callTheTag, "Added Tasks");
+            Intent backToMain = new Intent(Task.this, MainActivity.class);
+            Task.this.startActivity(backToMain);
         }
 
         @Override
@@ -104,30 +98,5 @@ public class Task extends AppCompatActivity {
             Log.e(callTheTag, e.toString());
         }
     };
-
-
-
-
-//    public void getTasks(){
-//        awsAppSyncClient.query(ListTaskssQuery.builder().build())
-//                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
-//                .enqueue(tasksCallback);
-//    }
-//
-//    private GraphQLCall.Callback<ListTaskssQuery.Data> tasksCallback = new GraphQLCall.Callback<ListTaskssQuery.Data>() {
-//        @Override
-//        public void onResponse(@Nonnull Response<ListTaskssQuery.Data> response) {
-//            Log.i(callTheTag, response.data().listTaskss().items().toString());
-//            for(ListTaskssQuery.Item item: response.data().listTaskss().items()){
-//                Tasks a = new Tasks(item.title(), item.body(), item.state());
-//                // 1:49:34 of video
-//            };
-//        }
-//
-//        @Override
-//        public void onFailure(@Nonnull ApolloException e) {
-//            Log.e(callTheTag, e.toString());
-//        }
-//    };
 
 }
