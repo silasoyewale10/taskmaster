@@ -41,4 +41,6 @@ I added recyclerview to the all task page and on the click of each task, it show
 ### Day 6
 Added dynamo db. Able to store and retrieve data from the AWS dynamo database. 
 ### Day 7
-I added login and sign up.
+I added login, logout, and sign up page.
+### Day 8
+I added s3. I can upload text to s3.
