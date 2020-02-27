@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import com.amazonaws.amplify.generated.graphql.ListTaskssQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.SignOutOptions;
 import com.amazonaws.mobile.client.UserState;
 import com.amazonaws.mobile.client.UserStateDetails;
 import com.amazonaws.mobile.config.AWSConfiguration;
@@ -71,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
         context = this.getApplicationContext();
 
-//        RecyclerView recyclerView = findViewById(R.id.fragment);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        recyclerView.setAdapter(new MyTaskRecyclerViewAdapter(listOfTasks, null));
-
-
         final Button goToAddTaskPage = findViewById(R.id.button3); //go to add taks page
         goToAddTaskPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Button goToSettingsPage = findViewById(R.id.button2);
         goToSettingsPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,15 +99,12 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity((goToSettingsPage));
             }
         });
-
-
-
         getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
 
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
 
                     @Override
-                    public void onResult(UserStateDetails userStateDetails) {
+                    public void onResult(final UserStateDetails userStateDetails) {
                         Log.i("INIT", "onResult: " + userStateDetails.getUserState());
                         if(userStateDetails.getUserState().equals(UserState.SIGNED_OUT)){
                             AWSMobileClient.getInstance().showSignIn(MainActivity.this, new Callback<UserStateDetails>() {
@@ -122,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                                         uploadWithTransferUtility();
 
                                     }
-
                                 }
 
                                 @Override
@@ -130,20 +122,44 @@ public class MainActivity extends AppCompatActivity {
                                     Log.e(callTheTag, "onError: ", e);
                                 }
                             });
-//AWSMobileClient.getInstance().signOut();
+
                         }
-
                     }
-
                     @Override
                     public void onError(Exception e) {
                         Log.e("INIT", "Initialization error.", e);
                     }
                 }
         );
+        Button logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                AWSMobileClient.getInstance().signOut();
+                AWSMobileClient.getInstance().showSignIn(MainActivity.this, new Callback<UserStateDetails>() {
+                    @Override
+                    public void onResult(UserStateDetails result) {
+                        Log.d(callTheTag, "onResult: " + result.getUserState());
+                        if(result.getUserState().equals(UserState.SIGNED_IN)){
+                            uploadWithTransferUtility();
 
+                        }
+                        @SuppressLint("WrongViewCast") EditText username2 = findViewById(R.id.username);
+                        String username = username2.getText().toString();
+                    }
 
+                    @Override
+                    public void onError(Exception e) {
+                        Log.e(callTheTag, "onError: ", e);
+                    }
+                });
+
+            }
+        });
+
+        TextView username2 = findViewById(R.id.username);
+        username2.setText(AWSMobileClient.getInstance().getUsername());
     }
 
     @Override
@@ -159,9 +175,6 @@ public class MainActivity extends AppCompatActivity {
         tt.setVisibility(View.VISIBLE);
 
         }
-
-
-
     public void getTasks(){
         awsAppSyncClient.query(ListTaskssQuery.builder().build())
                 .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
@@ -177,8 +190,6 @@ public class MainActivity extends AppCompatActivity {
                 Tasks a = new Tasks(item.title(), item.body(), item.state());
                 Log.i("quang", item.title());
                 listOfTasks.add(a);
-
-                // 1:49:34 of video
             };
 
             Handler handlerMainThread = new Handler(Looper.getMainLooper()) {
@@ -195,9 +206,6 @@ public class MainActivity extends AppCompatActivity {
             Log.e(callTheTag, e.toString());
         }
     };
-
-
-
     public void uploadWithTransferUtility() {
 
         TransferUtility transferUtility =
@@ -247,9 +255,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-        // If you prefer to poll for the data, instead of attaching a
-        // listener, check for the state and progress in the observer.
         if (TransferState.COMPLETED == uploadObserver.getState()) {
             // Handle a completed upload.
         }
