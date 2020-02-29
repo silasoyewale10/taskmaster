@@ -24,11 +24,12 @@ The all tasks page should just be an image with a back button; it needs no funct
 width=150; margin-right= 10px;/>
 
 # Notification Received When App Is Not in Use
-<img src="/screenshots/lab-38-homepage.png"
+<img src="/screenshots/lab-38-notification.png"
 width=150; margin-right= 10px;/>
 
+
 # Notification Drop Down
-<img src="/screenshots/lab-38-notification.png"
+<img src="/screenshots/lab-38-homepage.png"
 width=150; margin-right= 10px;/>
 
 ### DAILY CHANGE LOG:
@@ -51,3 +52,7 @@ Added dynamo db. Able to store and retrieve data from the AWS dynamo database.
 I added login, logout, and sign up page.
 ### Day 8
 I added s3. I can upload text to s3.
+### Day 9
+I added image to s3 bucket
+### Day 10
+I can send notification from pinpoint.
