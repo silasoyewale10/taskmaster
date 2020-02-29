@@ -23,6 +23,13 @@ The all tasks page should just be an image with a back button; it needs no funct
 <img src="/screenshots/lab-36-homepage.png"
 width=150; margin-right= 10px;/>
 
+# Notification Received When App Is Not in Use
+<img src="/screenshots/lab-38-homepage.png"
+width=150; margin-right= 10px;/>
+
+# Notification Drop Down
+<img src="/screenshots/lab-38-notification.png"
+width=150; margin-right= 10px;/>
 
 ### DAILY CHANGE LOG:
 
