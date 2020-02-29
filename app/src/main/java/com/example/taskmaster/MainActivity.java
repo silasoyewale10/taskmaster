@@ -61,10 +61,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
+
+
         awsAppSyncClient = AWSAppSyncClient.builder()
                 .context(getApplicationContext())
                 .awsConfiguration(new AWSConfiguration(getApplicationContext()))
                 .build();
+
+
+
+
+//        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
+//            @Override
+//            public void onResult(UserStateDetails userStateDetails) {
+//                Log.i(callTheTag, "AWSMobileClient initialized. User State is " + userStateDetails.getUserState());
+//                uploadWithTransferUtility();
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+//                Log.e(callTheTag, "Initialization error.", e);
+//            }
+//        });
+
+
+
         this.listOfTasks = new ArrayList<>();
 
         recyclerView = findViewById(R.id.fragment);
@@ -101,6 +123,9 @@ public class MainActivity extends AppCompatActivity {
         });
         getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
 
+
+        //uncomment right away
+
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
 
                     @Override
@@ -131,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+
+        //uncomment right away
+
         Button logout = findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
